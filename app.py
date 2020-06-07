@@ -14,3 +14,8 @@ def home_page():
     post = {"is_urgent": True, "task_name": "Pick up the kids"}
     mongo.db.tasks.insert_one(post)
     return "Post inserted." 
+
+if __name__ == '__main__':
+    app.run(host=os.environ.get('IP'),
+            port=int(os.environ.get('PORT')),
+            debug=True)
