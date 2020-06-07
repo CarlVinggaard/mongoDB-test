@@ -1,7 +1,7 @@
 import os
-from flask import Flask
-import flask_pymongo
+from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 
 app = Flask(__name__)
@@ -11,10 +11,20 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-def home_page():
-    post = {"is_urgent": True, "task_name": "Pick up the kids"}
-    mongo.db.tasks.insert_one(post)
-    return "Post inserted." 
+def get_tasks():
+    return render_template("tasks.html", tasks=mongo.db.tasks.find()) 
+
+
+@app.route('/add_task')
+def add_tasks():
+    return render_template('addtasks.html', categories=mongo.db.categories.find()) 
+
+
+@app.route('/insert_task', methods=['POST'])
+def insert_task():
+    tasks = mongo.db.tasks
+    tasks.insert_one(request.form.to_dict())
+    return redirect(url_for('get_tasks'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

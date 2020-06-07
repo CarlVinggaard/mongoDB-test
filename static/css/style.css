@@ -1,0 +1,19 @@
+body {
+    background-color: white;
+}
+
+.collapsible {
+    padding-top: 15px;
+}
+
+.btn-small {
+    height: 24px;
+    width: 60px;
+    line-height: 24px;
+    margin: 5px;
+    padding: 0 0.5em;
+}
+
+.task-header {
+    margin-top: 5px;
+}
