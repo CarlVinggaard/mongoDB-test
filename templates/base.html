@@ -13,6 +13,16 @@
     <title>Task manager</title>
 </head>
 <body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{{ url_for('get_tasks') }}" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{{ url_for('get_tasks') }}">Tasks</a></li>
+                <li><a href="{{ url_for('add_tasks') }}">New task</a></li>
+                <li><a href="{{ url_for('get_categories') }}">Categories</a></li>
+            </ul>
+        </div>
+  </nav>
     {% block content %} {% endblock %}
     
     <!-- Compiled and minified JavaScript -->
@@ -29,6 +39,10 @@
         
         $(document).ready(function(){
             $('select').formSelect();
+        });
+
+        $(document).ready(function(){
+            $('.sidenav').sidenav();
         });
     </script>
 </body>
